@@ -7,21 +7,25 @@ class GameOfLife
   def self.evaluate current_state, live_neighbours
     scenario = Scenario.new current_state, live_neighbours
     result = apply_rules scenario
-    result.to_s
+    result.state.to_s
   end
 
   def self.apply_rules scenario
-    result = scenario.state
     
     UnderPopulation.apply(scenario)
-    return scenario.state if scenario.resolved?
+    return scenario if scenario.resolved?
 
     OverCrowded.apply(scenario)
-    return scenario.state if scenario.resolved?
+    return scenario if scenario.resolved?
 
-    result = State.alive if scenario.state.alive? and scenario.neighbourhood.healthy?
-    result = State.alive if scenario.state.dead? and scenario.neighbourhood.flourishing?
-    result
+    Healthy.apply(scenario)
+    return scenario if scenario.resolved?
+
+    Flourish.apply(scenario)
+    return scenario if scenario.resolved?
+
+    
+    return scenario
   end
 end
 
@@ -45,6 +49,23 @@ class OverCrowded < Rule
   def self.apply scenario
     if scenario.state.alive? and scenario.neighbourhood.overcrowded?
       scenario.resolve(State.dead)
+    end
+  end
+end
+
+class Healthy < Rule
+  def self.apply scenario
+    if scenario.state.alive? and scenario.neighbourhood.healthy?
+      scenario.resolve(State.alive)
+    end
+  end
+end
+
+
+class Flourish < Rule
+  def self.apply scenario
+    if scenario.state.alive? and scenario.neighbourhood.flourishing?
+      scenario.resolve(State.alive)
     end
   end
 end

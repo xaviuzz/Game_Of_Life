@@ -4,6 +4,11 @@ class Neighbourhood
 	end
 
 	def healthy?
-  		@live_neighbours == 2 or @live_neighbours == 3
-  	end
+		@live_neighbours == 2 or @live_neighbours == 3
+	end
+
+  def flourishing?
+    @live_neighbours == 3
+  end
+
 end

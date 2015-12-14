@@ -24,6 +24,12 @@ describe "In the Conway's game of life " do
     expect(GameOfLife.evaluate(:dead_cell,neighbours)).to eq :dead_cell
   end
 
+  it "Any dead cell with exactly three live neighbours becomes a live cell." do
+    three_live_neighbours = 3
+    expect(GameOfLife.evaluate(:live_cell,three_live_neighbours)).to eq :live_cell
+    expect(GameOfLife.evaluate(:dead_cell,three_live_neighbours)).to eq :live_cell
+  end 
+
 end
 
 def withTwoOrThree! number

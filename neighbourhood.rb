@@ -11,4 +11,12 @@ class Neighbourhood
     @live_neighbours == 3
   end
 
+  def overcrowded?
+    @live_neighbours > 3
+  end
+
+  def underpopulated?
+    @live_neighbours < 2
+  end
+
 end

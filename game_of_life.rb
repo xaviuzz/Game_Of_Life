@@ -1,13 +1,14 @@
+require './neighbourhood'
+require './state'
+
 class GameOfLife
-  def self.evaluate (state, live_neighbours)
-  	return :live_cell if must_live? live_neighbours
+
+  def self.evaluate (current_state, live_neighbours)
+  	state = State.create(current_state)
+  	neighbourhood = Neighbourhood.new(live_neighbours)
+
+  	return :live_cell if state.alive? and neighbourhood.healthy?
+    
     :dead_cell
   end
-
-  private
-
-  def self.must_live? live_neighbours
-  	live_neighbours == 2 or live_neighbours == 3
-  end
-
 end

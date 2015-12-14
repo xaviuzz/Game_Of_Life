@@ -7,18 +7,21 @@ describe "In the Conway's game of life " do
     neighbours = 1
     expect(fewerThanTwo?(neighbours)).to eq true
     expect(GameOfLife.evaluate(:live_cell,neighbours)).to eq :dead_cell
+    expect(GameOfLife.evaluate(:dead_cell,neighbours)).to eq :dead_cell
 	end
 
   it "Any live cell with more than three live neighbours dies, as if by overcrowding" do
     neighbours = 4
     expect(moreThanThree?(neighbours)).to eq true
     expect(GameOfLife.evaluate(:live_cell,neighbours)).to eq :dead_cell
+    expect(GameOfLife.evaluate(:dead_cell,neighbours)).to eq :dead_cell
   end
 
   it "Any live cell with two or three live neighbours lives on to the next generation" do
     neighbours = 2
     withTwoOrThree! neighbours
     expect(GameOfLife.evaluate(:live_cell,neighbours)).to eq :live_cell
+    expect(GameOfLife.evaluate(:dead_cell,neighbours)).to eq :dead_cell
   end
 
 end

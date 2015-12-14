@@ -12,20 +12,18 @@ class GameOfLife
   end
 
   def self.apply_rules scenario
+    rules=[
+        UnderPopulation.new,
+        OverCrowded.new,
+        Healthy.new,
+        Flourish.new      
+    ]
+
+    rules.each do |rule|
+      rule.apply(scenario)
+      break if scenario.resolved?      
+    end
     
-    UnderPopulation.apply(scenario)
-    return scenario if scenario.resolved?
-
-    OverCrowded.apply(scenario)
-    return scenario if scenario.resolved?
-
-    Healthy.apply(scenario)
-    return scenario if scenario.resolved?
-
-    Flourish.apply(scenario)
-    return scenario if scenario.resolved?
-
-    
-    return scenario
+    scenario
   end
 end

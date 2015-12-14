@@ -1,10 +1,10 @@
 class State
-	def self.create(description)
-		result = nil
-		result = alive if description == :live_cell
+  def self.create(description)
+    result = nil
+    result = alive if description == :live_cell          
     result = dead if description == :dead_cell
-		return result
-	end
+    return result
+  end
 
   def self.alive
     return Alive.new
@@ -13,10 +13,9 @@ class State
   def self.dead
     return Dead.new
   end
-
-
-	def alive?
-	end
+  
+  def alive?
+  end
   def dead?
   end
   def to_s
@@ -25,13 +24,12 @@ class State
   private
   def initialize
   end
-
 end
 
 class Alive < State
-	def alive?
-		true
-	end
+  def alive?
+    true
+  end
   def dead?
     false
   end

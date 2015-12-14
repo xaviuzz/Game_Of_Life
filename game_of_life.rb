@@ -64,7 +64,7 @@ end
 
 class Flourish < Rule
   def self.apply scenario
-    if scenario.state.alive? and scenario.neighbourhood.flourishing?
+    if scenario.state.dead? and scenario.neighbourhood.flourishing?
       scenario.resolve(State.alive)
     end
   end

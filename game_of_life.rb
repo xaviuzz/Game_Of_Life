@@ -1,4 +1,6 @@
 require "./scenario"
+require "./state"
+
 class GameOfLife
   OVERCROW_TRESHOLD = 3
   UNDERPOPULATION_TRESHOLD = 2
@@ -7,21 +9,21 @@ class GameOfLife
   def self.evaluate state, population
     scenario = Scenario.new state, population
     result = scenario.evaluation
-    result = :dead_cell if overcrowded? scenario
-    result = :dead_cell if underpopulated? scenario
-    result = :live_cell if healthy? scenario
-    result = :live_cell if flourishing? scenario
-    result
+    result = State.dead if overcrowded? scenario
+    result = State.dead if underpopulated? scenario
+    result = State.alive if healthy? scenario
+    result = State.alive if flourishing? scenario
+    result.to_sym
   end
   
   private
 
   def self.healthy? scenario
-    scenario.state==:alive_cell and balanced? scenario.population
+    scenario.state.alive? and balanced? scenario.population
   end  
 
   def self.flourishing?  scenario
-    scenario.state==:dead_cell and fertile? scenario.population
+    scenario.state.dead? and fertile? scenario.population
   end
 
   def self.overcrowded? scenario

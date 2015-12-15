@@ -1,8 +1,10 @@
 class Scenario
   attr_reader :evaluation, :population, :state
-  def initialize state, population
-    @state= state
+
+  def initialize state_description, population
+    @state= State.from state_description
     @population= population
-    @evaluation= state
+    @evaluation= @state
   end
+
 end

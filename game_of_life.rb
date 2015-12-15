@@ -13,10 +13,17 @@ class GameOfLife
   private
 
   def self.apply_rules scenario
-    Flourishing.new.apply scenario
-    Overcrowded.new.apply scenario
-    Healthy.new.apply scenario
-    Underpopulated.new.apply scenario
+    rules=[
+      Flourishing.new,
+      Overcrowded.new,
+      Healthy.new,
+      Underpopulated.new
+    ]
+
+    rules.each do |rule|
+      rule.apply scenario
+    end
+    
   end
 
   

@@ -1,5 +1,5 @@
 class Scenario
-  attr_reader :evaluation, :population, :state
+  attr_reader  :population, :state
 
   def initialize state_description, population
     @state= State.from state_description
@@ -10,5 +10,8 @@ class Scenario
   def resolve evaluation
     @evaluation= evaluation
   end
-
+  
+  def evaluation
+    @evaluation.to_sym
+  end
 end

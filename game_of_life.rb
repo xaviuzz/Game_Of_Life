@@ -1,6 +1,7 @@
 require "./scenario"
 require "./state"
 require "./rule"
+require "./rules"
 
 class GameOfLife
   
@@ -13,17 +14,7 @@ class GameOfLife
   private
 
   def self.apply_rules scenario
-    rules=[
-      Flourishing.new,
-      Overcrowded.new,
-      Healthy.new,
-      Underpopulated.new
-    ]
-
-    rules.each do |rule|
-      rule.apply scenario
-    end
-    
+    Rules.new.apply scenario
   end
 
   

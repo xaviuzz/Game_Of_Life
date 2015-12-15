@@ -7,4 +7,8 @@ class Scenario
     @evaluation= @state
   end
 
+  def resolve evaluation
+    @evaluation= evaluation
+  end
+
 end

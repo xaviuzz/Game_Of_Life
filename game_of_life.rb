@@ -8,15 +8,19 @@ class GameOfLife
   
   def self.evaluate state, population
     scenario = Scenario.new state, population
-    result = scenario.evaluation
-    result = State.dead if overcrowded? scenario
-    result = State.dead if underpopulated? scenario
-    result = State.alive if healthy? scenario
-    result = State.alive if flourishing? scenario
+    result = apply_rules scenario
     result.to_sym
   end
   
   private
+
+  def self.apply_rules scenario
+    scenario.resolve (State.alive) if flourishing? scenario
+    scenario.resolve (State.dead) if overcrowded? scenario
+    scenario.resolve (State.alive) if healthy? scenario
+    scenario.resolve (State.dead) if underpopulated? scenario
+    scenario.evaluation
+  end
 
   def self.healthy? scenario
     scenario.state.alive? and balanced? scenario.population

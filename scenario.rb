@@ -7,11 +7,12 @@ class Scenario
     @evaluation= @state
   end
 
-  def resolve evaluation
-    @evaluation= evaluation
-  end
-  
   def evaluation
     @evaluation.to_sym
+  end
+
+  def apply rule
+    evaluated = rule.evaluate(@state,@population)
+    @evaluation = evaluated unless evaluated.nil?
   end
 end

@@ -1,18 +1,19 @@
 class Rule
-  def apply scenario
+
+  def evaluate state, population
     raise "Abstract Rule represents the interface"
   end
 end
 
 class Flourishing<Rule
   FERTILE_POBLATION = 3
-  
-  def apply scenario
-    scenario.resolve (State.alive) if flourishing? scenario
+  def evaluate state, population
+    return State.alive if flourishing? state,population
+    nil
   end
 
-  def flourishing?  scenario
-    scenario.state.dead? and fertile? scenario.population
+  def flourishing?  state , population
+    state.dead? and fertile? population
   end
 
   def fertile? population
@@ -23,24 +24,26 @@ end
 class Overcrowded<Rule
   OVERCROW_TRESHOLD = 3
 
-  def apply scenario
-    scenario.resolve (State.dead) if overcrowded? scenario
+  def evaluate state, population
+    return State.dead if overcrowded? population
+    nil
   end
 
-  def overcrowded? scenario
-    scenario.population > OVERCROW_TRESHOLD
+  def overcrowded? population
+    population > OVERCROW_TRESHOLD
   end
 end
 
 class Underpopulated<Rule
   UNDERPOPULATION_TRESHOLD = 2
   
-  def apply scenario
-    scenario.resolve (State.dead) if underpopulated? scenario
+  def evaluate state, population
+    return State.dead if underpopulated? population
+    nil
   end
   
-  def underpopulated? scenario
-    scenario.population < UNDERPOPULATION_TRESHOLD
+  def underpopulated? population
+    population < UNDERPOPULATION_TRESHOLD
   end
 
 end
@@ -50,12 +53,13 @@ class Healthy<Rule
   MAX_POPULATION=3
   BALANCED=(MIN_POPULATION..MAX_POPULATION)
 
-  def apply scenario
-    scenario.resolve (State.alive) if healthy? scenario
+  def evaluate state, population
+    return State.alive if healthy? state, population
+    nil
   end
 
-  def healthy? scenario
-    scenario.state.alive? and balanced? scenario.population
+  def healthy? state, population
+    state.alive? and balanced? population
   end  
 
   def balanced? population

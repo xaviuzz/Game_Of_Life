@@ -10,7 +10,7 @@ class Rules
 
   def apply scenario
     @rules.each do |rule|
-      rule.apply scenario
+      scenario.apply rule
     end
   end
 end

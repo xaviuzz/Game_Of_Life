@@ -9,11 +9,26 @@ class State
   def self.dead
     Dead.new
   end
+  def self.null
+    Null.new
+  end
   def alive?
     false
   end
   def dead?
     false
+  end
+  def null?
+    false
+  end
+end
+
+class Null<State
+  def to_sym
+    :null
+  end
+  def null?
+    true
   end
 end
 

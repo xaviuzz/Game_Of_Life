@@ -9,7 +9,7 @@ class Flourishing<Rule
   FERTILE_POBLATION = 3
   def evaluate state, population
     return State.alive if flourishing? state,population
-    nil
+    State.null
   end
 
   def flourishing?  state , population
@@ -26,7 +26,7 @@ class Overcrowded<Rule
 
   def evaluate state, population
     return State.dead if overcrowded? population
-    nil
+    State.null
   end
 
   def overcrowded? population
@@ -39,7 +39,7 @@ class Underpopulated<Rule
   
   def evaluate state, population
     return State.dead if underpopulated? population
-    nil
+    State.null
   end
   
   def underpopulated? population
@@ -55,7 +55,7 @@ class Healthy<Rule
 
   def evaluate state, population
     return State.alive if healthy? state, population
-    nil
+    State.null
   end
 
   def healthy? state, population

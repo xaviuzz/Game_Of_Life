@@ -13,6 +13,6 @@ class Scenario
 
   def apply rule
     evaluated = rule.evaluate(@state,@population)
-    @evaluation = evaluated unless evaluated.nil?
+    @evaluation = evaluated unless evaluated.null?
   end
 end

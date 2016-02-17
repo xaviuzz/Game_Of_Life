@@ -1,7 +1,7 @@
 require './game_of_life'
 require 'rspec'
 
-describe "In the Conway's game of life " do
+describe "The rules of the Conway's game of life are: " do
 
   it "Any live cell with fewer than two live neighbours dies, as if caused by underpopulation" do
     neighbours = 1
